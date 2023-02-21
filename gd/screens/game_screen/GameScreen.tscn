@@ -1,12 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://0myin5gita4i"]
+[gd_scene load_steps=5 format=3 uid="uid://0myin5gita4i"]
 
+[ext_resource type="Script" path="res://gd/screens/game_screen/GameScreen.gd" id="1_gahdm"]
 [ext_resource type="PackedScene" uid="uid://darrgjsw1bfwl" path="res://gd/ui/components/PSMessageBox.tscn" id="1_qawl0"]
+[ext_resource type="PackedScene" uid="uid://c1r2l4rrtyki1" path="res://gd/ui/components/PSPanel.tscn" id="2_8yq2y"]
+[ext_resource type="PackedScene" uid="uid://dxg61mkqwp16h" path="res://gd/ui/components/PSHeaderPanel.tscn" id="4_nqeot"]
 
 [node name="GameScreen" type="Node2D"]
+script = ExtResource("1_gahdm")
 
 [node name="root" type="CanvasLayer" parent="."]
 
 [node name="bottom_message_box" parent="root" instance=ExtResource("1_qawl0")]
+visible = false
 custom_minimum_size = Vector2(1104, 252)
 anchors_preset = 7
 anchor_left = 0.5
@@ -17,3 +22,130 @@ offset_top = -276.0
 offset_right = 552.0
 offset_bottom = -24.0
 grow_vertical = 0
+
+[node name="main_panel" parent="root" instance=ExtResource("2_8yq2y")]
+custom_minimum_size = Vector2(435, 480)
+anchors_preset = 4
+anchor_top = 0.5
+anchor_right = 0.0
+anchor_bottom = 0.5
+offset_left = 72.0
+offset_top = -240.0
+offset_right = 507.0
+offset_bottom = 240.0
+grow_horizontal = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="root/main_panel/PanelContainer/MarginContainer" index="0"]
+layout_mode = 2
+
+[node name="inventory_button" type="Button" parent="root/main_panel/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../leave_game_button")
+text = "Inventory"
+alignment = 0
+
+[node name="tech_button" type="Button" parent="root/main_panel/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Techniques"
+alignment = 0
+
+[node name="state_button" type="Button" parent="root/main_panel/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "State"
+alignment = 0
+
+[node name="macro_button" type="Button" parent="root/main_panel/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Macro"
+alignment = 0
+
+[node name="settings_button" type="Button" parent="root/main_panel/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+alignment = 0
+
+[node name="talk_button" type="Button" parent="root/main_panel/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Talk"
+alignment = 0
+
+[node name="save_game_button" type="Button" parent="root/main_panel/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Save Game"
+alignment = 0
+
+[node name="leave_game_button" type="Button" parent="root/main_panel/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../inventory_button")
+text = "Leave Game"
+alignment = 0
+
+[node name="inventory_panel" parent="root" instance=ExtResource("4_nqeot")]
+offset_left = 96.0
+offset_top = 32.0
+offset_right = -554.0
+offset_bottom = -35.0
+
+[node name="header_label" parent="root/inventory_panel/PanelContainer/VBoxContainer" index="0"]
+text = "Inventory"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer" index="0"]
+clip_contents = false
+layout_mode = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Monomate × 127"
+alignment = 0
+
+[node name="Button2" type="Button" parent="root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Dimate × 127"
+alignment = 0
+
+[node name="Button3" type="Button" parent="root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "NaN"
+alignment = 0
+
+[node name="Button4" type="Button" parent="root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "NaN"
+alignment = 0
+
+[node name="Button5" type="Button" parent="root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "NaN"
+alignment = 0
+
+[node name="Button6" type="Button" parent="root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "NaN"
+alignment = 0
+
+[node name="Button7" type="Button" parent="root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "NaN"
+alignment = 0
+
+[node name="Button8" type="Button" parent="root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "NaN"
+alignment = 0
+
+[editable path="root/main_panel"]
+[editable path="root/inventory_panel"]
