@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=8 format=3 uid="uid://c1e7myieei5dx"]
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://c1e7myieei5dx"]
 
 [ext_resource type="FontFile" uid="uid://sg404ea1oc4l" path="res://fonts/verdana/verdana.ttf" id="1_eaeb2"]
 
@@ -42,6 +42,16 @@ border_width_right = 7
 border_width_bottom = 7
 border_color = Color(0.298039, 0.337255, 0.376471, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_avob8"]
+content_margin_left = 20.0
+content_margin_right = 10.0
+bg_color = Color(0.215686, 0.356863, 0.505882, 1)
+border_width_left = 7
+border_width_top = 7
+border_width_right = 7
+border_width_bottom = 7
+border_color = Color(0.219608, 0.568627, 0.647059, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_soy3r"]
 bg_color = Color(0.215686, 0.254902, 0.317647, 1)
 border_width_left = 7
@@ -68,6 +78,7 @@ Button/styles/disabled = SubResource("StyleBoxFlat_ngk3b")
 Button/styles/focus = SubResource("StyleBoxFlat_p087t")
 Button/styles/hover = SubResource("StyleBoxFlat_gooqv")
 Button/styles/normal = SubResource("StyleBoxFlat_022j0")
+Button/styles/pressed = SubResource("StyleBoxFlat_avob8")
 Label/font_sizes/font_size = 35
 Label/fonts/font = ExtResource("1_eaeb2")
 Panel/styles/panel = SubResource("StyleBoxFlat_soy3r")
