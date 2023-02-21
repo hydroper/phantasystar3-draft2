@@ -1,9 +1,11 @@
 extends Control
 
-signal after_popup
-signal after_collapse
+signal after_popup(goal: String)
+signal after_collapse(goal: String)
 
 var _disabled: bool = false
+var _popup_goal: String = ""
+var _collapse_goal: String = ""
 var _busy: bool = false
 var _open_close_timer_max: float = 9
 var _mult_factor: float = 1.0 / _open_close_timer_max
@@ -25,7 +27,7 @@ func _process(delta):
 			self.position.x -= self.size.x / 2
 			_busy = false
 			_collapsed = true
-			self.after_collapse.emit()
+			self.after_collapse.emit(_collapse_goal)
 		_close_timer -= 1
 	elif _open_timer > 0:
 		self.position.x -= self.size.x / 2 * _mult_factor
@@ -35,21 +37,23 @@ func _process(delta):
 			disabled = false
 			_busy = false
 			_collapsed = false
-			self.after_popup.emit()
+			self.after_popup.emit(_popup_goal)
 
-func popup():
+func popup(goal: String):
 	if _busy:
 		return
 	_busy = true
+	_popup_goal = goal
 	self.visible = true
 	disabled = true
 	_open_timer = _open_close_timer_max
 	self.position.x += self.size.x / 2
 
-func collapse():
+func collapse(goal: String):
 	if _busy:
 		return
 	# get_viewport().gui_release_focus()
+	_collapse_goal = goal
 	_busy = true
 	_close_timer = _open_close_timer_max
 	disabled = true

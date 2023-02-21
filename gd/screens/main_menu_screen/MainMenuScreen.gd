@@ -22,7 +22,7 @@ func _ready():
 	$root/initial_layer/initial_panel/PanelContainer/MarginContainer/VBoxContainer/start_game_button.pressed.connect(func():
 		layer_set.deferred_swap(game_selection_layer))
 	$root/initial_layer/initial_panel/PanelContainer/MarginContainer/VBoxContainer/exit_button.pressed.connect(func():
-		get_tree().quit())
+		layer_set.deferred_swap(null, "exit"))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

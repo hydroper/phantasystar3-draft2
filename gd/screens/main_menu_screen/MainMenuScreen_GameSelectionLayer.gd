@@ -2,10 +2,10 @@ class_name MainMenuScreen_GameSelectionLayer
 extends LayerSetItem
 
 func initialize():
-	pass
+	self.id = "game_selection_layer"
 
 func show():
 	pass
 
-func deferred_swap(item: LayerSetItem):
+func deferred_swap(item: LayerSetItem, goal: String = ""):
 	pass

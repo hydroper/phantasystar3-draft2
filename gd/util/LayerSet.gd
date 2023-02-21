@@ -10,11 +10,11 @@ func initialize() -> void:
 		sw.initialize()
 	deferred_swap(null)
 
-func deferred_swap(swap_to: LayerSetItem) -> void:
+func deferred_swap(swap_to: LayerSetItem, goal: String = "") -> void:
 	if swap_to != null && current_item == swap_to:
 		return
 	if current_item != null:
-		current_item.deferred_swap(swap_to)
+		current_item.deferred_swap(swap_to, goal)
 	else:
 		immediate_swap(swap_to)
 
@@ -27,3 +27,10 @@ func immediate_swap(swap_to: LayerSetItem) -> void:
 	current_item = swap_to
 	swap_to.canvas_layer.visible = true
 	swap_to.show()
+
+func item_by_id(id: String) -> LayerSetItem:
+	# suggestion: functional filter()
+	for it in items:
+		if it.id == id:
+			return it
+	return null

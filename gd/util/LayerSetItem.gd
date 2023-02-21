@@ -1,5 +1,7 @@
 class_name LayerSetItem
+extends Object
 
+var id: String = ""
 var parent_set: LayerSet = null
 var canvas_layer: CanvasLayer = null
 
@@ -9,7 +11,7 @@ func initialize():
 func show():
 	pass
 
-func deferred_swap(swap_to: LayerSetItem):
+func deferred_swap(swap_to: LayerSetItem, goal: String = ""):
 	if parent_set.current_item == swap_to:
 		return
 	immediate_swap(swap_to)
