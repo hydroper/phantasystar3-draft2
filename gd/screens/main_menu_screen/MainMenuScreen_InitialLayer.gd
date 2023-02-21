@@ -12,9 +12,9 @@ func initialize():
 		if goal == "initial":
 			start_game_button.grab_focus())
 	initial_panel.after_collapse.connect(func(goal):
-		if goal == "initial":
-			# switch to initial_layer
-			immediate_swap(self.parent_set.item_by_id("initial_layer"))
+		if goal == "game_selection":
+			# switch to game_selection_layer
+			immediate_swap(self.parent_set.item_by_id("game_selection_layer"))
 		elif goal == "exit":
 			self.canvas_layer.get_tree().quit())
 
@@ -24,5 +24,5 @@ func show():
 func deferred_swap(swap_to: LayerSetItem, goal: String = ""):
 	if goal == "exit":
 		initial_panel.collapse("exit")
-	else:
-		initial_panel.collapse("initial")
+	elif swap_to == self.parent_set.item_by_id("game_selection_layer"):
+		initial_panel.collapse("game_selection")

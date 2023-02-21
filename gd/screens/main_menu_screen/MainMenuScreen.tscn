@@ -50,6 +50,7 @@ grow_vertical = 2
 texture = ExtResource("1_cb4g2")
 
 [node name="initial_layer" type="CanvasLayer" parent="root"]
+visible = false
 
 [node name="initial_panel" parent="root/initial_layer" instance=ExtResource("2_34ibm")]
 custom_minimum_size = Vector2(840, 342)
@@ -85,4 +86,25 @@ alignment = 0
 
 [node name="game_selection_layer" type="CanvasLayer" parent="root"]
 
+[node name="game_selection_panel" parent="root/game_selection_layer" instance=ExtResource("2_34ibm")]
+custom_minimum_size = Vector2(840, 342)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -420.0
+offset_top = -51.0
+offset_right = 420.0
+offset_bottom = 291.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="root/game_selection_layer/game_selection_panel/PanelContainer/MarginContainer" index="0"]
+layout_mode = 2
+
+[node name="return_button" type="Button" parent="root/game_selection_layer/game_selection_panel/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Return"
+alignment = 0
+
 [editable path="root/initial_layer/initial_panel"]
+[editable path="root/game_selection_layer/game_selection_panel"]
