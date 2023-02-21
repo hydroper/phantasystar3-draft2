@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxg61mkqwp16h"]
+
+[ext_resource type="Script" path="res://gd/ui/components/PSHeaderPanel.gd" id="1_amwr0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b14hc"]
+content_margin_left = 60.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.196078, 0.352941, 0.490196, 1)
+
+[node name="root" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_amwr0")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="header_label" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_b14hc")
+text = "Title"
+uppercase = true
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10

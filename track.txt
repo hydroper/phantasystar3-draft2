@@ -1,0 +1,11 @@
+w: 1152
+h: 630
+
+Input Map:
+
+- Rename "skip_intro" to "skip"
+- skip
+  - Joypad Button 6
+  - Escape
+  - Left Mouse Button
+  - Joypad Button 0

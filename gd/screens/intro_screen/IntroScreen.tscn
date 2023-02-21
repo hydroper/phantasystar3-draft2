@@ -1,0 +1,79 @@
+[gd_scene load_steps=5 format=3 uid="uid://4kw0r5jw0alp"]
+
+[ext_resource type="Script" path="res://gd/screens/intro_screen/IntroScreen.gd" id="1_doey5"]
+[ext_resource type="Texture2D" uid="uid://l8x1m6l2gjik" path="res://img/segaLogo/logo.svg" id="2_6wtsv"]
+
+[sub_resource type="Animation" id="Animation_ja6c5"]
+resource_name = "default"
+length = 4.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("player/sega_logo:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 3.1, 3.6)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("player/advice1:modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.9, 1.3, 3.1, 3.6)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ajorr"]
+_data = {
+"default": SubResource("Animation_ja6c5")
+}
+
+[node name="root" type="Node2D"]
+script = ExtResource("1_doey5")
+
+[node name="root" type="CanvasLayer" parent="."]
+
+[node name="player" type="AnimationPlayer" parent="root"]
+autoplay = "default"
+libraries = {
+"": SubResource("AnimationLibrary_ajorr")
+}
+
+[node name="sega_logo" type="TextureRect" parent="root/player"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -225.0
+offset_top = -99.0
+offset_right = 225.0
+offset_bottom = 51.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_6wtsv")
+
+[node name="advice1" type="Label" parent="root/player"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -445.0
+offset_top = 124.5
+offset_right = 445.0
+offset_bottom = 227.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "This fan game includes properties owned by Sega"
+horizontal_alignment = 1
+autowrap_mode = 2
+uppercase = true

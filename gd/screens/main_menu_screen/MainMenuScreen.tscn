@@ -1,0 +1,88 @@
+[gd_scene load_steps=6 format=3 uid="uid://b50vhb2ulwqu"]
+
+[ext_resource type="Texture2D" uid="uid://5brsrmtu8klh" path="res://img/ps3Logo/logo.png" id="1_cb4g2"]
+[ext_resource type="Script" path="res://gd/screens/main_menu_screen/MainMenuScreen.gd" id="1_e2pwo"]
+[ext_resource type="PackedScene" uid="uid://c1r2l4rrtyki1" path="res://gd/ui/components/PSPanel.tscn" id="2_34ibm"]
+
+[sub_resource type="Animation" id="Animation_w1xax"]
+resource_name = "default"
+length = 1.1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("start_animation_player/game_logo:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.7)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_44oou"]
+_data = {
+"default": SubResource("Animation_w1xax")
+}
+
+[node name="root" type="Node2D"]
+script = ExtResource("1_e2pwo")
+
+[node name="root" type="CanvasLayer" parent="."]
+
+[node name="start_animation_player" type="AnimationPlayer" parent="root"]
+autoplay = "default"
+libraries = {
+"": SubResource("AnimationLibrary_44oou")
+}
+
+[node name="game_logo" type="TextureRect" parent="root/start_animation_player"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -214.0
+offset_right = 350.0
+offset_bottom = -106.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_cb4g2")
+
+[node name="initial_layer" type="CanvasLayer" parent="root"]
+
+[node name="initial_panel" parent="root/initial_layer" instance=ExtResource("2_34ibm")]
+custom_minimum_size = Vector2(840, 342)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -420.0
+offset_top = -51.0
+offset_right = 420.0
+offset_bottom = 291.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="root/initial_layer/initial_panel/PanelContainer/MarginContainer" index="0"]
+layout_mode = 2
+
+[node name="start_game_button" type="Button" parent="root/initial_layer/initial_panel/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../exit_button")
+text = "Start Game"
+alignment = 0
+
+[node name="about_button" type="Button" parent="root/initial_layer/initial_panel/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "About"
+alignment = 0
+
+[node name="exit_button" type="Button" parent="root/initial_layer/initial_panel/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../start_game_button")
+text = "Exit"
+alignment = 0
+
+[node name="game_selection_layer" type="CanvasLayer" parent="root"]
+
+[editable path="root/initial_layer/initial_panel"]
