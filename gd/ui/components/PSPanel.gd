@@ -11,7 +11,10 @@ var _open_close_timer_max: float = 9
 var _mult_factor: float = 1.0 / _open_close_timer_max
 var _open_timer: float = 0
 var _close_timer: float = 0
-var _collapsed: bool = false
+var _collapsed: bool = true
+
+func _init():
+	self.visible = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
