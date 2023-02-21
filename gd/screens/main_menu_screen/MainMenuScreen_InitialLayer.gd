@@ -6,8 +6,8 @@ var start_game_button = null
 
 func initialize():
 	self.id = "initial_layer"
-	initial_panel = self.canvas_layer.get_tree().root.get_child(0).get_node("root/initial_layer/initial_panel")
-	start_game_button = self.canvas_layer.get_tree().root.get_child(0).get_node("root/initial_layer/initial_panel/PanelContainer/MarginContainer/VBoxContainer/start_game_button")
+	initial_panel = self.get_child_node("root/initial_layer/initial_panel")
+	start_game_button = self.get_child_node("root/initial_layer/initial_panel/PanelContainer/MarginContainer/VBoxContainer/start_game_button")
 	initial_panel.after_popup.connect(func(goal):
 		if goal == "initial":
 			start_game_button.grab_focus())

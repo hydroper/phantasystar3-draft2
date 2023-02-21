@@ -39,7 +39,7 @@ func _process(delta):
 			_collapsed = false
 			self.after_popup.emit(_popup_goal)
 
-func popup(goal: String):
+func popup(goal: String = ""):
 	if _busy:
 		return
 	_busy = true
@@ -49,7 +49,7 @@ func popup(goal: String):
 	_open_timer = _open_close_timer_max
 	self.position.x += self.size.x / 2
 
-func collapse(goal: String):
+func collapse(goal: String = ""):
 	if _busy:
 		return
 	# get_viewport().gui_release_focus()

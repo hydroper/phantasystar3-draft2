@@ -8,6 +8,9 @@ var canvas_layer: CanvasLayer = null
 func initialize():
 	pass
 
+func get_child_node(path: NodePath) -> Node:
+	return canvas_layer.get_tree().root.get_child(0).get_node(path)
+
 func show():
 	pass
 

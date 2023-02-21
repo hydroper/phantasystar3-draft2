@@ -6,8 +6,8 @@ var game_selection_return_button = null
 
 func initialize():
 	self.id = "game_selection_layer"
-	game_selection_panel = self.canvas_layer.get_tree().root.get_child(0).get_node("root/game_selection_layer/game_selection_panel")
-	game_selection_return_button = self.canvas_layer.get_tree().root.get_child(0).get_node("root/game_selection_layer/game_selection_panel/PanelContainer/MarginContainer/VBoxContainer/return_button")
+	game_selection_panel = self.get_child_node("root/game_selection_layer/game_selection_panel")
+	game_selection_return_button = self.get_child_node("root/game_selection_layer/game_selection_panel/PanelContainer/MarginContainer/VBoxContainer/return_button")
 	game_selection_panel.after_popup.connect(func(goal):
 		game_selection_return_button.grab_focus())
 	game_selection_panel.after_collapse.connect(func(goal):
