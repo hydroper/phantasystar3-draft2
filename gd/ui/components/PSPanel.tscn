@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://gd/ui/components/PSPanel.gd" id="1_lg3pv"]
 
-[node name="root" type="Control"]
+[node name="PSPanel" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

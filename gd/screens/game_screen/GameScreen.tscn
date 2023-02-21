@@ -1,5 +1,19 @@
-[gd_scene format=3 uid="uid://0myin5gita4i"]
+[gd_scene load_steps=2 format=3 uid="uid://0myin5gita4i"]
 
-[node name="root" type="Node2D"]
+[ext_resource type="PackedScene" uid="uid://darrgjsw1bfwl" path="res://gd/ui/components/PSMessageBox.tscn" id="1_qawl0"]
+
+[node name="GameScreen" type="Node2D"]
 
 [node name="root" type="CanvasLayer" parent="."]
+
+[node name="bottom_message_box" parent="root" instance=ExtResource("1_qawl0")]
+custom_minimum_size = Vector2(1104, 252)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+offset_left = -552.0
+offset_top = -276.0
+offset_right = 552.0
+offset_bottom = -24.0
+grow_vertical = 0

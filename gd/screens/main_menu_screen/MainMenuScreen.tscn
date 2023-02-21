@@ -24,7 +24,7 @@ _data = {
 "default": SubResource("Animation_w1xax")
 }
 
-[node name="root" type="Node2D"]
+[node name="MainMenuScreen" type="Node2D"]
 script = ExtResource("1_e2pwo")
 
 [node name="root" type="CanvasLayer" parent="."]
