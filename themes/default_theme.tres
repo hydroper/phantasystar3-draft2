@@ -83,3 +83,4 @@ Label/font_sizes/font_size = 35
 Label/fonts/font = ExtResource("1_eaeb2")
 Panel/styles/panel = SubResource("StyleBoxFlat_soy3r")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_36mnc")
+RichTextLabel/fonts/normal_font = ExtResource("1_eaeb2")
