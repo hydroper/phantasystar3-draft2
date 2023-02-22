@@ -2,6 +2,9 @@
 
 ## Game: Main Panel
 
+- Inventory
+  - Swap
+  - Discard
 - Talk Button
   - Is "Mumble" button depending on current Party members.
 - State Button
