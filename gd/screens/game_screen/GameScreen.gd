@@ -29,7 +29,7 @@ func _ready():
 		
 	# leave game panel
 	leave_game_panel.after_popup.connect(func(_goal):
-		$root/leave_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/yes_button.grab_focus())
+		$root/leave_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/no_button.grab_focus())
 	leave_game_panel.after_collapse.connect(func(_goal):
 		$root/pause_panel/PanelContainer/MarginContainer/VBoxContainer/leave_game_button.grab_focus())
 
