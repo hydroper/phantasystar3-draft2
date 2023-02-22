@@ -3,31 +3,35 @@ extends BaseAnimatedPanel
 signal after_read
 
 @onready
-var rtl = $PanelContainer/MarginContainer/VBoxContainer/message
-var typing: bool = false
-var typing_remaining := PackedStringArray()
-var typing_frame_max: int = 2
-var typing_frame_counter: int = 0
+var _rtl = $PanelContainer/MarginContainer/VBoxContainer/message
+var _typing: bool = false
+var _typing_remaining := PackedStringArray()
+var _typing_frame_max: int = 2
+var _typing_frame_counter: int = 0
 
 func type_message(msg: String):
-	rtl.text = ""
+	_rtl.text = ""
 	if msg == "":
+		_typing = false
 		return
-	typing = true
-	typing_remaining = msg.split("")
-	typing_frame_counter = 0
+	_typing = true
+	_typing_remaining = msg.split("")
+	_typing_frame_counter = 0
 
 func _process(delta):
 	super._process(delta)
-	if typing:
-		if typing_frame_counter == 0:
-			if typing_remaining.size() == 0:
-				typing = false
-			else:
-				var s = ArrayShift.shift(typing_remaining)
-				if s == " " && typing_remaining.size() != 0:
-					rtl.text += " " + ArrayShift.shift(typing_remaining)
+	if _typing:
+		if Input.is_action_just_released("skip"):
+			_typing = false
+			_rtl.text += ArrayJoin.join(_typing_remaining, "")
+			_typing_remaining = PackedStringArray()
+		else:
+			if _typing_frame_counter == 0:
+				if _typing_remaining.size() == 0:
+					_typing = false
 				else:
-					rtl.text += s
-		typing_frame_counter += 1
-		typing_frame_counter %= typing_frame_max
+					_rtl.text += ArrayShift.shift(_typing_remaining)
+			_typing_frame_counter += 1
+			_typing_frame_counter %= _typing_frame_max
+	elif Input.is_action_just_released("skip") && is_open && (not _typing):
+		after_read.emit()
