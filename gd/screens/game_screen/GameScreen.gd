@@ -38,6 +38,8 @@ func _ready():
 		$root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.grab_focus()
 		$root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.selected = 0)
 	inventory_panel.after_collapse.connect(func(_goal):
+		var ct = $root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer
+		ClearNodeChildren.clear(ct)
 		$root/pause_panel/PanelContainer/MarginContainer/VBoxContainer/inventory_button.grab_focus())
 		
 	# leave game panel
@@ -87,7 +89,35 @@ func no_panel_other_than_pause_is_open() -> bool:
 	return pause_related_panels_but_no_root_panel.filter(func(p): return p.is_open).size() == 0
 
 func open_inventory():
+	var ct = $root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer
+	for item in game_state.inventory_items:
+		ct.add_child(create_inventory_item_button(item))
 	inventory_panel.popup()
 
 func filter_inventory(index: int):
-	pass
+	var ct = $root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer
+	ClearNodeChildren.clear(ct)
+	if index == 0:
+		for item in game_state.inventory_items:
+			ct.add_child(create_inventory_item_button(item))
+	else:
+		var category = (
+			InventoryItem.Category.CONSUMABLE
+			if index == 1 else
+			InventoryItem.Category.WEAPON
+			if index == 2 else
+			InventoryItem.Category.ARMOR
+			if index == 3 else
+			InventoryItem.Category.CONSUMABLE
+			if index == 4 else
+			InventoryItem.Category.OTHER
+		)
+		for item in game_state.inventory_items:
+			if item.category == category:
+				ct.add_child(create_inventory_item_button(item))
+
+func create_inventory_item_button(item: InventoryItem):
+	var btn = Button.new()
+	btn.text = item.name + " × " + str(item.quantity)
+	btn.alignment = HorizontalAlignment.HORIZONTAL_ALIGNMENT_LEFT
+	return btn
