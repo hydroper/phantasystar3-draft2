@@ -25,6 +25,8 @@ func _ready():
 		layer_set.deferred_swap(null, "exit"))
 
 	# game_selection_layer
+	$root/game_selection_layer/game_selection_panel/PanelContainer/MarginContainer/VBoxContainer/new_game_button.pressed.connect(func():
+		$root/game_selection_layer/game_selection_panel.collapse("new_game"))
 	$root/game_selection_layer/game_selection_panel/PanelContainer/MarginContainer/VBoxContainer/return_button.pressed.connect(func():
 		layer_set.deferred_swap(initial_layer))
 
@@ -76,7 +78,9 @@ class GameSelectionLayer extends LayerSetItem:
 		game_selection_panel.after_popup.connect(func(goal):
 			game_selection_return_button.grab_focus())
 		game_selection_panel.after_collapse.connect(func(goal):
-			if goal == "return":
+			if goal == "new_game":
+				canvas_layer.get_tree().change_scene_to_file("res://gd/screens/game_screen/GameScreen.tscn")
+			elif goal == "return":
 				# switch to initial_layer
 				immediate_swap(self.parent_set.item_by_id("initial_layer")))
 

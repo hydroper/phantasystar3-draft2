@@ -131,6 +131,7 @@ text = "Monomate × 127"
 alignment = 0
 
 [node name="leave_panel" parent="root" instance=ExtResource("4_nqeot")]
+visible = false
 offset_left = 94.0
 offset_top = 107.0
 offset_right = -284.0
