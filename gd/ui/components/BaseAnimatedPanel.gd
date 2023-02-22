@@ -45,7 +45,7 @@ func _process(_delta):
 			self.after_popup.emit(_popup_goal)
 
 func _input(event):
-	if (event is InputEventMouseButton) and event.pressed:
+	if is_open && !_busy && (event is InputEventMouseButton) and event.pressed:
 		var ev_local = make_input_local(event)
 		if !Rect2(Vector2(0, 0), size).has_point(ev_local.position):
 			outside_click.emit()

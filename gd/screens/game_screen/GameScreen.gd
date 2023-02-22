@@ -41,12 +41,17 @@ func _ready():
 	inventory_panel.after_collapse.connect(func(_goal):
 		ClearChildren.of($root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer)
 		$root/pause_panel/PanelContainer/MarginContainer/VBoxContainer/inventory_button.grab_focus())
+	inventory_panel.outside_click.connect(func():
+		if inventory_item_panel.is_collapsed:
+			inventory_panel.collapse())
 
 	# inventory panel > item panel
 	inventory_item_panel.after_popup.connect(func(_goal):
 		$root/inventory_item_panel/PanelContainer/MarginContainer/VBoxContainer/use_button.grab_focus())
 	inventory_item_panel.after_collapse.connect(func(_goal):
 		inventory_item_panel_selected_button.grab_focus())
+	inventory_item_panel.outside_click.connect(func():
+		inventory_item_panel.collapse())
 
 	# leave game panel
 	leave_game_panel.after_popup.connect(func(_goal):
@@ -56,6 +61,8 @@ func _ready():
 			pause_panel.collapse("leave_game")
 		else:
 			$root/pause_panel/PanelContainer/MarginContainer/VBoxContainer/leave_game_button.grab_focus())
+	leave_game_panel.outside_click.connect(func():
+		leave_game_panel.collapse())
 
 	# pause > inventory button
 	$root/pause_panel/PanelContainer/MarginContainer/VBoxContainer/inventory_button.pressed.connect(func():
@@ -64,7 +71,7 @@ func _ready():
 	# pause > leave game button
 	$root/pause_panel/PanelContainer/MarginContainer/VBoxContainer/leave_game_button.pressed.connect(func():
 		leave_game_panel.popup())
-	
+
 	$root/pause_panel.outside_click.connect(func():
 		if no_panel_other_than_pause_is_open():
 			pause_panel.collapse())
@@ -72,10 +79,6 @@ func _ready():
 	# inventory > filter button
 	$root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.item_selected.connect(func(index):
 		filter_inventory(index))
-
-	# inventory > return button
-	$root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/return_button.pressed.connect(func():
-		inventory_panel.collapse())
 
 	# leave game > yes button
 	$root/leave_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/yes_button.pressed.connect(func():
@@ -107,11 +110,11 @@ func open_inventory():
 	for item in game_state.inventory_items:
 		ct.add_child(create_inventory_item_button(item))
 	# focus change
-	##### $root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.focus_neighbor_top = $root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.get_path()
-	##### var last_button = LastChild.of(ct)
-	##### if last_button != null:
-		##### $root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.focus_neighbor_top = last_button.get_path()
-		##### last_button.focus_neighbor_bottom = $root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.get_path()
+	$root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.focus_neighbor_top = $root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.get_path()
+	var last_button = LastChild.of(ct)
+	if last_button != null:
+		$root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.focus_neighbor_top = last_button.get_path()
+		last_button.focus_neighbor_bottom = $root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.get_path()
 	inventory_panel.popup()
 
 func filter_inventory(index: int):
@@ -126,11 +129,11 @@ func filter_inventory(index: int):
 			if item.category == category:
 				ct.add_child(create_inventory_item_button(item))
 	# focus change
-	######## $root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.focus_neighbor_top = $root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.get_path()
-	######## var last_button = LastChild.of(ct)
-	######## if last_button != null:
-		######## $root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.focus_neighbor_top = last_button.get_path()
-		######## last_button.focus_neighbor_bottom = $root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.get_path()
+	$root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.focus_neighbor_top = $root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.get_path()
+	var last_button = LastChild.of(ct)
+	if last_button != null:
+		$root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.focus_neighbor_top = last_button.get_path()
+		last_button.focus_neighbor_bottom = $root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.get_path()
 
 func create_inventory_item_button(item: InventoryItem):
 	var btn = Button.new()
