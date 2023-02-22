@@ -82,6 +82,7 @@ text = "Leave Game"
 alignment = 0
 
 [node name="inventory_panel" parent="root" instance=ExtResource("4_nqeot")]
+visible = false
 offset_left = 96.0
 offset_top = 32.0
 offset_right = -554.0

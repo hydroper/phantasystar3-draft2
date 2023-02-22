@@ -1,6 +1,7 @@
 class_name BaseAnimatedPanel
 extends Control
 
+signal outside_click
 signal after_popup(goal: String)
 signal after_collapse(goal: String)
 
@@ -42,6 +43,12 @@ func _process(_delta):
 			_busy = false
 			_collapsed = false
 			self.after_popup.emit(_popup_goal)
+
+func _input(event):
+	if (event is InputEventMouseButton) and event.pressed:
+		var ev_local = make_input_local(event)
+		if !Rect2(Vector2(0, 0), size).has_point(ev_local.position):
+			outside_click.emit()
 
 func popup(goal: String = ""):
 	if _busy:

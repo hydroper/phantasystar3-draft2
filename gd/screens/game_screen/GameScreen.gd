@@ -65,6 +65,10 @@ func _ready():
 	$root/pause_panel/PanelContainer/MarginContainer/VBoxContainer/leave_game_button.pressed.connect(func():
 		leave_game_panel.popup())
 	
+	$root/pause_panel.outside_click.connect(func():
+		if no_panel_other_than_pause_is_open():
+			pause_panel.collapse())
+
 	# inventory > filter button
 	$root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.item_selected.connect(func(index):
 		filter_inventory(index))
