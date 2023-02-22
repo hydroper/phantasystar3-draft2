@@ -39,7 +39,7 @@ func _ready():
 		$root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.selected = 0)
 	inventory_panel.after_collapse.connect(func(_goal):
 		var ct = $root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer
-		ClearNodeChildren.clear(ct)
+		ClearChildren.of(ct)
 		$root/pause_panel/PanelContainer/MarginContainer/VBoxContainer/inventory_button.grab_focus())
 		
 	# leave game panel
@@ -92,7 +92,8 @@ func open_inventory():
 	var ct = $root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer
 	for item in game_state.inventory_items:
 		ct.add_child(create_inventory_item_button(item))
-	var last_button = GetNodeLastChild.of(ct)
+	$root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.focus_neighbor_top = $root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.get_path()
+	var last_button = LastChild.of(ct)
 	if last_button != null:
 		$root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.focus_neighbor_top = last_button.get_path()
 		last_button.focus_neighbor_bottom = $root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.get_path()
@@ -100,7 +101,7 @@ func open_inventory():
 
 func filter_inventory(index: int):
 	var ct = $root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer
-	ClearNodeChildren.clear(ct)
+	ClearChildren.of(ct)
 	if index == 0:
 		for item in game_state.inventory_items:
 			ct.add_child(create_inventory_item_button(item))
@@ -109,7 +110,8 @@ func filter_inventory(index: int):
 		for item in game_state.inventory_items:
 			if item.category == category:
 				ct.add_child(create_inventory_item_button(item))
-	var last_button = GetNodeLastChild.of(ct)
+	$root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.focus_neighbor_top = $root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.get_path()
+	var last_button = LastChild.of(ct)
 	if last_button != null:
 		$root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.focus_neighbor_top = last_button.get_path()
 		last_button.focus_neighbor_bottom = $root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.get_path()

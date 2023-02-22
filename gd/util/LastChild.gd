@@ -1,4 +1,4 @@
-class_name GetNodeLastChild extends Object
+class_name LastChild extends Object
 
 static func of(node: Node) -> Node:
 	var r = node.get_children()
