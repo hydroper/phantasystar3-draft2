@@ -13,13 +13,13 @@ script = ExtResource("1_gahdm")
 
 [node name="bottom_message_box" parent="root" instance=ExtResource("1_qawl0")]
 visible = false
-custom_minimum_size = Vector2(1104, 252)
+custom_minimum_size = Vector2(1104, 220)
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 offset_left = -552.0
-offset_top = -276.0
+offset_top = -244.0
 offset_right = 552.0
 offset_bottom = -24.0
 grow_vertical = 0
@@ -82,7 +82,6 @@ text = "Leave Game"
 alignment = 0
 
 [node name="inventory_panel" parent="root" instance=ExtResource("4_nqeot")]
-visible = false
 offset_left = 96.0
 offset_top = 32.0
 offset_right = -554.0
@@ -123,6 +122,38 @@ vertical_scroll_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="inventory_item_panel" parent="root" instance=ExtResource("2_8yq2y")]
+offset_left = 621.0
+offset_top = 59.0
+offset_right = -138.0
+offset_bottom = -327.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="root/inventory_item_panel/PanelContainer/MarginContainer" index="0"]
+layout_mode = 2
+
+[node name="use_button" type="Button" parent="root/inventory_item_panel/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../discard_button")
+text = "Use
+"
+alignment = 0
+
+[node name="look_button" type="Button" parent="root/inventory_item_panel/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Look"
+alignment = 0
+
+[node name="swap_button" type="Button" parent="root/inventory_item_panel/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Swap"
+alignment = 0
+
+[node name="discard_button" type="Button" parent="root/inventory_item_panel/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../use_button")
+text = "Discard"
+alignment = 0
+
 [node name="leave_panel" parent="root" instance=ExtResource("4_nqeot")]
 visible = false
 offset_left = 94.0
@@ -153,6 +184,25 @@ focus_neighbor_bottom = NodePath("../yes_button")
 text = "No, continue"
 alignment = 0
 
+[node name="bottom_message_box_over_ui" parent="root" instance=ExtResource("1_qawl0")]
+visible = false
+custom_minimum_size = Vector2(1104, 170)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+offset_left = -552.0
+offset_top = -194.0
+offset_right = 552.0
+offset_bottom = -24.0
+grow_vertical = 0
+
+[node name="author" parent="root/bottom_message_box_over_ui/PanelContainer/MarginContainer/VBoxContainer" index="0"]
+visible = false
+
+[editable path="root/bottom_message_box"]
 [editable path="root/pause_panel"]
 [editable path="root/inventory_panel"]
+[editable path="root/inventory_item_panel"]
 [editable path="root/leave_panel"]
+[editable path="root/bottom_message_box_over_ui"]
