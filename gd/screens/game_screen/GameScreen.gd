@@ -45,6 +45,10 @@ func _ready():
 		if inventory_item_panel.is_collapsed:
 			inventory_panel.collapse())
 
+	# inventory panel > filter button
+	$root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.item_selected.connect(func(index):
+		filter_inventory(index))
+
 	# inventory panel > item panel
 	inventory_item_panel.after_popup.connect(func(_goal):
 		$root/inventory_item_panel/PanelContainer/MarginContainer/VBoxContainer/use_button.grab_focus())
@@ -64,6 +68,13 @@ func _ready():
 	leave_game_panel.outside_click.connect(func():
 		leave_game_panel.collapse())
 
+	# leave game > yes button
+	$root/leave_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/yes_button.pressed.connect(func():
+		leave_game_panel.collapse("leave_game"))
+	# leave game > no button
+	$root/leave_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/no_button.pressed.connect(func():
+		leave_game_panel.collapse())
+
 	# pause > inventory button
 	$root/pause_panel/PanelContainer/MarginContainer/VBoxContainer/inventory_button.pressed.connect(func():
 		open_inventory())
@@ -75,17 +86,6 @@ func _ready():
 	$root/pause_panel.outside_click.connect(func():
 		if no_panel_other_than_pause_is_open():
 			pause_panel.collapse())
-
-	# inventory > filter button
-	$root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.item_selected.connect(func(index):
-		filter_inventory(index))
-
-	# leave game > yes button
-	$root/leave_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/yes_button.pressed.connect(func():
-		leave_game_panel.collapse("leave_game"))
-	# leave game > no button
-	$root/leave_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/no_button.pressed.connect(func():
-		leave_game_panel.collapse())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
