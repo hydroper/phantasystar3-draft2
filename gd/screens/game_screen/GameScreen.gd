@@ -9,6 +9,9 @@ var pause_panel = $root/pause_panel
 @onready
 var inventory_panel = $root/inventory_panel
 @onready
+var inventory_item_panel = $root/inventory_item_panel
+var inventory_item_panel_selected_button = null
+@onready
 var leave_game_panel = $root/leave_panel
 
 # collapse-priority-based Array of panels
@@ -18,6 +21,7 @@ var pause_related_panels_but_no_root_panel = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pause_related_panels = [
+		inventory_item_panel,
 		inventory_panel,
 		leave_game_panel,
 		pause_panel,
@@ -39,10 +43,15 @@ func _ready():
 		$root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.grab_focus()
 		$root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.selected = 0)
 	inventory_panel.after_collapse.connect(func(_goal):
-		var ct = $root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer
-		ClearChildren.of(ct)
+		ClearChildren.of($root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer)
 		$root/pause_panel/PanelContainer/MarginContainer/VBoxContainer/inventory_button.grab_focus())
-		
+
+	# inventory panel > item panel
+	inventory_item_panel.after_popup.connect(func(_goal):
+		$root/inventory_item_panel/PanelContainer/MarginContainer/VBoxContainer/use_button.grab_focus())
+	inventory_item_panel.after_collapse.connect(func(_goal):
+		inventory_item_panel_selected_button.grab_focus())
+
 	# leave game panel
 	leave_game_panel.after_popup.connect(func(_goal):
 		$root/leave_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/no_button.grab_focus())
@@ -121,6 +130,9 @@ func create_inventory_item_button(item: InventoryItem):
 	var btn = Button.new()
 	btn.text = item.name + " × " + str(item.quantity)
 	btn.alignment = HorizontalAlignment.HORIZONTAL_ALIGNMENT_LEFT
+	btn.pressed.connect(func():
+		inventory_item_panel_selected_button = btn
+		inventory_item_panel.popup())
 	return btn
 
 func inventory_category_from_index(index: int) -> InventoryItem.Category:
