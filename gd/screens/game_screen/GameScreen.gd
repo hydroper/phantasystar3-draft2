@@ -4,15 +4,11 @@ var game_state := GameState.new()
 var in_battle: bool = false
 var paused: bool = false
 
-@onready
-var pause_panel = $root/pause_panel
-@onready
-var inventory_panel = $root/inventory_panel
-@onready
-var inventory_item_panel = $root/inventory_item_panel
+@onready var pause_panel = $root/pause_panel
+@onready var inventory_panel = $root/inventory_panel
+@onready var inventory_item_panel = $root/inventory_item_panel
 var inventory_item_panel_selected_button = null
-@onready
-var leave_game_panel = $root/leave_panel
+@onready var leave_game_panel = $root/leave_panel
 
 # collapse-priority-based Array of panels
 var pause_related_panels = []
