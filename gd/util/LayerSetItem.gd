@@ -14,7 +14,7 @@ func get_child_node(path: NodePath) -> Node:
 func show():
 	pass
 
-func deferred_swap(swap_to: LayerSetItem, goal: String = ""):
+func deferred_swap(swap_to: LayerSetItem, _goal: String = ""):
 	if parent_set.current_item == swap_to:
 		return
 	immediate_swap(swap_to)

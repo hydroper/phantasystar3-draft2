@@ -75,7 +75,7 @@ class GameSelectionLayer extends LayerSetItem:
 		self.id = "game_selection_layer"
 		game_selection_panel = self.get_child_node("root/game_selection_layer/game_selection_panel")
 		game_selection_return_button = self.get_child_node("root/game_selection_layer/game_selection_panel/PanelContainer/MarginContainer/VBoxContainer/return_button")
-		game_selection_panel.after_popup.connect(func(goal):
+		game_selection_panel.after_popup.connect(func(_goal):
 			game_selection_return_button.grab_focus())
 		game_selection_panel.after_collapse.connect(func(goal):
 			if goal == "new_game":

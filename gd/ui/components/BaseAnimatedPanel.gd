@@ -22,7 +22,7 @@ func _ready():
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if _close_timer > 0:
 		self.position.x += self.size.x / 2 * _mult_factor
 		self.scale.x = (_close_timer - 1) * _mult_factor
