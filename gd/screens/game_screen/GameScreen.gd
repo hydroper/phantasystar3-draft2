@@ -23,6 +23,7 @@ func _ready():
 		pause_panel,
 	]
 	pause_related_panels_but_no_root_panel = pause_related_panels.filter(func(p): return p != pause_panel)
+
 	# pause panel
 	pause_panel.after_popup.connect(func(_goal):
 		paused = true
