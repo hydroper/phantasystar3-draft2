@@ -1,6 +1,7 @@
 class_name InventoryItem extends Object
 
 var name: String = "undefined"
+var description: String = "No description available."
 var quantity: int = 1
 var accumulates: bool = false
 var disposable: bool = true

@@ -22,8 +22,7 @@ func _ready():
 		leave_game_panel,
 		pause_panel,
 	]
-	pause_related_panels_but_no_root_panel = pause_related_panels.filter(func(p):
-		return p != pause_panel)
+	pause_related_panels_but_no_root_panel = pause_related_panels.filter(func(p): return p != pause_panel)
 	# pause panel
 	pause_panel.after_popup.connect(func(_goal):
 		paused = true
@@ -52,11 +51,15 @@ func _ready():
 
 	# pause > inventory button
 	$root/pause_panel/PanelContainer/MarginContainer/VBoxContainer/inventory_button.pressed.connect(func():
-		inventory_panel.popup())
+		open_inventory())
 	
 	# pause > leave game button
 	$root/pause_panel/PanelContainer/MarginContainer/VBoxContainer/leave_game_button.pressed.connect(func():
 		leave_game_panel.popup())
+	
+	# inventory -> filter button
+	$root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.item_selected.connect(func(index):
+		filter_inventory(index))
 	
 	# leave game > yes button
 	$root/leave_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/yes_button.pressed.connect(func():
@@ -82,3 +85,9 @@ func _process(_delta):
 
 func no_panel_other_than_pause_is_open() -> bool:
 	return pause_related_panels_but_no_root_panel.filter(func(p): return p.is_open).size() == 0
+
+func open_inventory():
+	inventory_panel.popup()
+
+func filter_inventory(index: int):
+	pass

@@ -87,6 +87,6 @@ class GameSelectionLayer extends LayerSetItem:
 	func show():
 		game_selection_panel.popup("")
 
-	func deferred_swap(swap_to: LayerSetItem, goal: String = ""):
+	func deferred_swap(swap_to: LayerSetItem, _goal: String = ""):
 		if swap_to == self.parent_set.item_by_id("initial_layer"):
 			game_selection_panel.collapse("return")
