@@ -53,16 +53,20 @@ texture = ExtResource("1_cb4g2")
 visible = false
 
 [node name="initial_panel" parent="root/initial_layer" instance=ExtResource("2_34ibm")]
-custom_minimum_size = Vector2(840, 342)
-anchors_preset = 8
+custom_minimum_size = Vector2(840, 235)
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
 offset_left = -420.0
-offset_top = -51.0
+offset_top = -283.0
 offset_right = 420.0
-offset_bottom = 291.0
+offset_bottom = -48.0
+grow_vertical = 0
+
+[node name="PanelContainer" parent="root/initial_layer/initial_panel" index="0"]
+offset_top = -32.0
+offset_bottom = -32.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="root/initial_layer/initial_panel/PanelContainer/MarginContainer" index="0"]
 layout_mode = 2
@@ -85,18 +89,19 @@ text = "Exit"
 alignment = 0
 
 [node name="game_selection_layer" type="CanvasLayer" parent="root"]
+visible = false
 
 [node name="game_selection_panel" parent="root/game_selection_layer" instance=ExtResource("2_34ibm")]
-custom_minimum_size = Vector2(840, 342)
-anchors_preset = 8
+custom_minimum_size = Vector2(840, 166)
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
 offset_left = -420.0
-offset_top = -51.0
+offset_top = -278.0
 offset_right = 420.0
-offset_bottom = 291.0
+offset_bottom = -112.0
+grow_vertical = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="root/game_selection_layer/game_selection_panel/PanelContainer/MarginContainer" index="0"]
 layout_mode = 2
