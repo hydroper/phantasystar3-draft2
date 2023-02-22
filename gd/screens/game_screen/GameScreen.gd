@@ -92,6 +92,10 @@ func open_inventory():
 	var ct = $root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer
 	for item in game_state.inventory_items:
 		ct.add_child(create_inventory_item_button(item))
+	var last_button = GetNodeLastChild.of(ct)
+	if last_button != null:
+		$root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.focus_neighbor_top = last_button.get_path()
+		last_button.focus_neighbor_bottom = $root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.get_path()
 	inventory_panel.popup()
 
 func filter_inventory(index: int):
@@ -101,23 +105,28 @@ func filter_inventory(index: int):
 		for item in game_state.inventory_items:
 			ct.add_child(create_inventory_item_button(item))
 	else:
-		var category = (
-			InventoryItem.Category.CONSUMABLE
-			if index == 1 else
-			InventoryItem.Category.WEAPON
-			if index == 2 else
-			InventoryItem.Category.ARMOR
-			if index == 3 else
-			InventoryItem.Category.CONSUMABLE
-			if index == 4 else
-			InventoryItem.Category.OTHER
-		)
+		var category = inventory_category_from_index(index)
 		for item in game_state.inventory_items:
 			if item.category == category:
 				ct.add_child(create_inventory_item_button(item))
+	var last_button = GetNodeLastChild.of(ct)
+	if last_button != null:
+		$root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.focus_neighbor_top = last_button.get_path()
+		last_button.focus_neighbor_bottom = $root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.get_path()
 
 func create_inventory_item_button(item: InventoryItem):
 	var btn = Button.new()
 	btn.text = item.name + " × " + str(item.quantity)
 	btn.alignment = HorizontalAlignment.HORIZONTAL_ALIGNMENT_LEFT
 	return btn
+
+func inventory_category_from_index(index: int) -> InventoryItem.Category:
+	return (
+		InventoryItem.Category.CONSUMABLE
+		if index == 1 else
+		InventoryItem.Category.WEAPON
+		if index == 2 else
+		InventoryItem.Category.ARMOR
+		if index == 3 else
+		InventoryItem.Category.OTHER
+	)

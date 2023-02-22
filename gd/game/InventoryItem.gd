@@ -15,15 +15,15 @@ enum Category {
 }
 
 class Monomate extends InventoryItem:
-	func _init(quantity: int = 1):
+	func _init(qty: int = 1):
 		name = "Monomate"
 		accumulates = true
 		category = Category.CONSUMABLE
-		self.quantity = quantity
+		quantity = qty
 
 class Dimate extends InventoryItem:
-	func _init(quantity: int = 1):
+	func _init(qty: int = 1):
 		name = "Dimate"
 		accumulates = true
 		category = Category.CONSUMABLE
-		self.quantity = quantity
+		quantity = qty
