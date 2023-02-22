@@ -60,15 +60,19 @@ func _ready():
 	# pause > inventory button
 	$root/pause_panel/PanelContainer/MarginContainer/VBoxContainer/inventory_button.pressed.connect(func():
 		open_inventory())
-	
+
 	# pause > leave game button
 	$root/pause_panel/PanelContainer/MarginContainer/VBoxContainer/leave_game_button.pressed.connect(func():
 		leave_game_panel.popup())
 	
-	# inventory -> filter button
+	# inventory > filter button
 	$root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.item_selected.connect(func(index):
 		filter_inventory(index))
-	
+
+	# inventory > return button
+	$root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/return_button.pressed.connect(func():
+		inventory_panel.collapse())
+
 	# leave game > yes button
 	$root/leave_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/yes_button.pressed.connect(func():
 		leave_game_panel.collapse("leave_game"))
@@ -98,11 +102,12 @@ func open_inventory():
 	var ct = $root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer
 	for item in game_state.inventory_items:
 		ct.add_child(create_inventory_item_button(item))
-	$root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.focus_neighbor_top = $root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.get_path()
-	var last_button = LastChild.of(ct)
-	if last_button != null:
-		$root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.focus_neighbor_top = last_button.get_path()
-		last_button.focus_neighbor_bottom = $root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.get_path()
+	# focus change
+	##### $root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.focus_neighbor_top = $root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.get_path()
+	##### var last_button = LastChild.of(ct)
+	##### if last_button != null:
+		##### $root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.focus_neighbor_top = last_button.get_path()
+		##### last_button.focus_neighbor_bottom = $root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.get_path()
 	inventory_panel.popup()
 
 func filter_inventory(index: int):
@@ -116,11 +121,12 @@ func filter_inventory(index: int):
 		for item in game_state.inventory_items:
 			if item.category == category:
 				ct.add_child(create_inventory_item_button(item))
-	$root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.focus_neighbor_top = $root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.get_path()
-	var last_button = LastChild.of(ct)
-	if last_button != null:
-		$root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.focus_neighbor_top = last_button.get_path()
-		last_button.focus_neighbor_bottom = $root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.get_path()
+	# focus change
+	######## $root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.focus_neighbor_top = $root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.get_path()
+	######## var last_button = LastChild.of(ct)
+	######## if last_button != null:
+		######## $root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.focus_neighbor_top = last_button.get_path()
+		######## last_button.focus_neighbor_bottom = $root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/inventory_filter_button.get_path()
 
 func create_inventory_item_button(item: InventoryItem):
 	var btn = Button.new()
