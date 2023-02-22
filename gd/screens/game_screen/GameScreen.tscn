@@ -24,7 +24,7 @@ offset_right = 552.0
 offset_bottom = -24.0
 grow_vertical = 0
 
-[node name="main_panel" parent="root" instance=ExtResource("2_8yq2y")]
+[node name="pause_panel" parent="root" instance=ExtResource("2_8yq2y")]
 custom_minimum_size = Vector2(435, 480)
 anchors_preset = 4
 anchor_top = 0.5
@@ -36,46 +36,46 @@ offset_right = 507.0
 offset_bottom = 240.0
 grow_horizontal = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="root/main_panel/PanelContainer/MarginContainer" index="0"]
+[node name="VBoxContainer" type="VBoxContainer" parent="root/pause_panel/PanelContainer/MarginContainer" index="0"]
 layout_mode = 2
 
-[node name="inventory_button" type="Button" parent="root/main_panel/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="inventory_button" type="Button" parent="root/pause_panel/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../leave_game_button")
 text = "Inventory"
 alignment = 0
 
-[node name="tech_button" type="Button" parent="root/main_panel/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="tech_button" type="Button" parent="root/pause_panel/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Techniques"
 alignment = 0
 
-[node name="state_button" type="Button" parent="root/main_panel/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="state_button" type="Button" parent="root/pause_panel/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "State"
 alignment = 0
 
-[node name="macro_button" type="Button" parent="root/main_panel/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="macro_button" type="Button" parent="root/pause_panel/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Macro"
 alignment = 0
 
-[node name="settings_button" type="Button" parent="root/main_panel/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="settings_button" type="Button" parent="root/pause_panel/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Settings"
 alignment = 0
 
-[node name="talk_button" type="Button" parent="root/main_panel/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="talk_button" type="Button" parent="root/pause_panel/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Talk"
 alignment = 0
 
-[node name="save_game_button" type="Button" parent="root/main_panel/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="save_game_button" type="Button" parent="root/pause_panel/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Save Game"
 alignment = 0
 
-[node name="leave_game_button" type="Button" parent="root/main_panel/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="leave_game_button" type="Button" parent="root/pause_panel/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../inventory_button")
 text = "Leave Game"
@@ -129,5 +129,5 @@ size_flags_horizontal = 3
 text = "Monomate × 127"
 alignment = 0
 
-[editable path="root/main_panel"]
+[editable path="root/pause_panel"]
 [editable path="root/inventory_panel"]
