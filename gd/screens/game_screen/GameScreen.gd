@@ -10,6 +10,9 @@ var paused: bool = false
 var inventory_item_panel_selected_button = null
 @onready var leave_game_panel = $root/leave_panel
 
+@onready var bottom_message_box = $root/bottom_message_box
+@onready var bottom_message_box_over_ui = $root/bottom_message_box_over_ui
+
 # collapse-priority-based Array of panels
 var pause_related_panels = []
 var pause_related_panels_but_no_root_panel = []
@@ -97,10 +100,22 @@ func _process(_delta):
 			pause_panel.popup()
 	# pause (2)
 	if paused && Input.is_action_just_released("ui_cancel"):
-		for p in pause_related_panels:
-			if p.is_open:
-				p.collapse()
-				break
+		if bottom_message_box.is_open:
+			pass
+		elif bottom_message_box_over_ui.is_open:
+			pass
+		else:
+			for p in pause_related_panels:
+				if p.is_open:
+					p.collapse()
+					break
+	elif paused && Input.is_action_just_pressed("skip"):
+		if bottom_message_box.is_open:
+			# stub
+			pass
+		elif bottom_message_box_over_ui.is_open:
+			# stub
+			pass
 
 func no_panel_other_than_pause_is_open() -> bool:
 	return pause_related_panels_but_no_root_panel.filter(func(p): return p.is_open).size() == 0
