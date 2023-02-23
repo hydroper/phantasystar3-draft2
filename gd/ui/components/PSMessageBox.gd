@@ -9,6 +9,7 @@ var _typing: bool = false
 var _typing_remaining := PackedStringArray()
 var _typing_frame_max: int = 2
 var _typing_frame_counter: int = 0
+var _can_skip_typing: bool = false
 
 var is_typing: bool:
 	get:
@@ -27,12 +28,13 @@ func type_message(msg: String, after_read_callback: Callable = func(): pass):
 		return
 	_typing = true
 	_typing_remaining = msg.split("")
-	_typing_frame_counter = 1
+	_typing_frame_counter = 0
+	_can_skip_typing = false
 
 func _process(delta):
 	super._process(delta)
 	if _typing:
-		if Input.is_action_just_released("done_reading_message"):
+		if _can_skip_typing && Input.is_action_just_released("done_reading_message"):
 			_typing = false
 			_rtl.text += ArrayJoin.join(_typing_remaining, "")
 			_typing_remaining = PackedStringArray()
@@ -46,6 +48,7 @@ func _process(delta):
 				_typing = false
 			_typing_frame_counter += 1
 			_typing_frame_counter %= _typing_frame_max
+			_can_skip_typing = true
 	elif is_open && (not _typing) && Input.is_action_just_released("done_reading_message"):
 		_was_read = true
 		if _after_read_callback != null:
