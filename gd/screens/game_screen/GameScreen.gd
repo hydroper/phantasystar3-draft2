@@ -126,7 +126,7 @@ func _process(_delta):
 				if p.is_open:
 					p.collapse()
 					break
-	elif paused && Input.is_action_just_pressed("skip") || Input.is_action_just_pressed("ui_cancel"):
+	elif paused && Input.is_action_just_pressed("skip") || Input.is_action_just_pressed("done_reading_message"):
 		if bottom_message_box.is_open && !bottom_message_box.is_typing && bottom_message_box.is_read:
 			# stub
 			pass

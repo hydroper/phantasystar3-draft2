@@ -32,7 +32,7 @@ func type_message(msg: String, after_read_callback: Callable = func(): pass):
 func _process(delta):
 	super._process(delta)
 	if _typing:
-		if Input.is_action_just_released("skip"):
+		if Input.is_action_just_released("done_reading_message"):
 			_typing = false
 			_rtl.text += ArrayJoin.join(_typing_remaining, "")
 			_typing_remaining = PackedStringArray()
@@ -46,8 +46,8 @@ func _process(delta):
 				_typing = false
 			_typing_frame_counter += 1
 			_typing_frame_counter %= _typing_frame_max
-	elif Input.is_action_just_released("skip") && is_open && (not _typing):
+	elif is_open && (not _typing) && Input.is_action_just_released("done_reading_message"):
+		_was_read = true
 		if _after_read_callback != null:
-			_was_read = true
 			_after_read_callback.call()
 			_after_read_callback = null
