@@ -41,7 +41,7 @@ func _ready():
 	inventory_panel.after_collapse.connect(func(_goal):
 		ClearChildren.of($root/inventory_panel/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer)
 		$root/pause_panel/PanelContainer/MarginContainer/VBoxContainer/inventory_button.grab_focus())
-	inventory_panel.outside_click.connect(func():
+	inventory_panel.outer_click.connect(func():
 		if inventory_item_panel.is_collapsed:
 			inventory_panel.collapse())
 
@@ -54,7 +54,7 @@ func _ready():
 		$root/inventory_item_panel/PanelContainer/MarginContainer/VBoxContainer/use_button.grab_focus())
 	inventory_item_panel.after_collapse.connect(func(_goal):
 		inventory_item_panel_selected_button.grab_focus())
-	inventory_item_panel.outside_click.connect(func():
+	inventory_item_panel.outer_click.connect(func():
 		inventory_item_panel.collapse())
 
 	# leave game panel
@@ -65,7 +65,7 @@ func _ready():
 			pause_panel.collapse("leave_game")
 		else:
 			$root/pause_panel/PanelContainer/MarginContainer/VBoxContainer/leave_game_button.grab_focus())
-	leave_game_panel.outside_click.connect(func():
+	leave_game_panel.outer_click.connect(func():
 		leave_game_panel.collapse())
 
 	# leave game > yes button
@@ -83,7 +83,7 @@ func _ready():
 	$root/pause_panel/PanelContainer/MarginContainer/VBoxContainer/leave_game_button.pressed.connect(func():
 		leave_game_panel.popup())
 
-	$root/pause_panel.outside_click.connect(func():
+	$root/pause_panel.outer_click.connect(func():
 		if no_panel_other_than_pause_is_open():
 			pause_panel.collapse())
 
