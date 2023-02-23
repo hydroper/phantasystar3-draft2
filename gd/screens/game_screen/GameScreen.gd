@@ -74,6 +74,7 @@ func _ready():
 	$root/inventory_item_panel/PanelContainer/MarginContainer/VBoxContainer/look_button.pressed.connect(func():
 		get_viewport().gui_release_focus()
 		bottom_message_box_over_ui.popup()
+		inventory_panel_item___type_description_index = 0
 		inventory_panel_item___type_description())
 
 	# leave game panel
