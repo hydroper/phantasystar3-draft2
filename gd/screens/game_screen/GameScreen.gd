@@ -5,9 +5,13 @@ var in_battle: bool = false
 var paused: bool = false
 
 @onready var pause_panel = $root/pause_panel
+
 @onready var inventory_panel = $root/inventory_panel
 @onready var inventory_item_panel = $root/inventory_item_panel
 var inventory_item_panel_selected_button = null
+var inventory_item_panel_selected_item: InventoryItem = null
+var inventory_panel_item___type_description_index = 0
+
 @onready var leave_game_panel = $root/leave_panel
 
 @onready var bottom_message_box = $root/bottom_message_box
@@ -26,6 +30,10 @@ func _ready():
 		pause_panel,
 	]
 	pause_related_panels_but_no_root_panel = pause_related_panels.filter(func(p): return p != pause_panel)
+
+	bottom_message_box_over_ui.after_collapse.connect(func(goal):
+		if goal == "inventory_look_button":
+			$root/inventory_item_panel/PanelContainer/MarginContainer/VBoxContainer/look_button.grab_focus())
 
 	# pause panel
 	pause_panel.after_popup.connect(func(_goal):
@@ -58,7 +66,15 @@ func _ready():
 	inventory_item_panel.after_collapse.connect(func(_goal):
 		inventory_item_panel_selected_button.grab_focus())
 	inventory_item_panel.outer_click.connect(func():
+		if bottom_message_box_over_ui.is_open:
+			return
 		inventory_item_panel.collapse())
+
+	# inventory panel > item > look button
+	$root/inventory_item_panel/PanelContainer/MarginContainer/VBoxContainer/look_button.pressed.connect(func():
+		get_viewport().gui_release_focus()
+		bottom_message_box_over_ui.popup()
+		inventory_panel_item___type_description())
 
 	# leave game panel
 	leave_game_panel.after_popup.connect(func(_goal):
@@ -109,13 +125,12 @@ func _process(_delta):
 				if p.is_open:
 					p.collapse()
 					break
-	elif paused && Input.is_action_just_pressed("skip"):
+	elif paused && Input.is_action_just_pressed("skip") || Input.is_action_just_pressed("ui_cancel"):
 		if bottom_message_box.is_open:
 			# stub
 			pass
 		elif bottom_message_box_over_ui.is_open:
-			# stub
-			pass
+			bottom_message_box_over_ui.collapse("inventory_look_button")
 
 func no_panel_other_than_pause_is_open() -> bool:
 	return pause_related_panels_but_no_root_panel.filter(func(p): return p.is_open).size() == 0
@@ -155,6 +170,7 @@ func create_inventory_item_button(item: InventoryItem):
 	btn.text = item.name + " × " + str(item.quantity)
 	btn.alignment = HorizontalAlignment.HORIZONTAL_ALIGNMENT_LEFT
 	btn.pressed.connect(func():
+		inventory_item_panel_selected_item = item
 		inventory_item_panel_selected_button = btn
 		inventory_item_panel.popup())
 	return btn
@@ -169,3 +185,10 @@ func inventory_category_from_index(index: int) -> InventoryItem.Category:
 		if index == 3 else
 		InventoryItem.Category.OTHER
 	)
+
+func inventory_panel_item___type_description():
+	if inventory_panel_item___type_description_index == inventory_item_panel_selected_item.description.size():
+		return
+	var msg = inventory_item_panel_selected_item.description[inventory_panel_item___type_description_index]
+	inventory_panel_item___type_description_index += 1
+	bottom_message_box_over_ui.type_message(msg, inventory_panel_item___type_description)
