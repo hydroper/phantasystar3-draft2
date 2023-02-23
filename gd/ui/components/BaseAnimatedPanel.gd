@@ -41,7 +41,7 @@ func _process(_delta):
 		if _open_timer == 0:
 			disabled = false
 			_busy = false
-			_collapsed = false
+			#_collapsed = false
 			self.after_popup.emit(_popup_goal)
 
 func _input(event):
@@ -58,6 +58,7 @@ func popup(goal: String = ""):
 	self.visible = true
 	disabled = true
 	_open_timer = _open_close_timer_max
+	_collapsed = false
 	self.position.x += self.size.x / 2
 
 func collapse(goal: String = ""):

@@ -27,7 +27,7 @@ func type_message(msg: String, after_read_callback: Callable = func(): pass):
 		return
 	_typing = true
 	_typing_remaining = msg.split("")
-	_typing_frame_counter = 0
+	_typing_frame_counter = 1
 
 func _process(delta):
 	super._process(delta)

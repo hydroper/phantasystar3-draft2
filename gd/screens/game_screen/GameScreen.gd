@@ -109,29 +109,34 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	# pause
-	if not in_battle && Input.is_action_just_released("pause"):
-		if paused && no_panel_other_than_pause_is_open():
-			pause_panel.collapse()
-		elif not paused:
-			pause_panel.popup()
-	# pause (2)
+	# return in pause-related panels
 	if paused && Input.is_action_just_released("ui_cancel"):
 		if bottom_message_box.is_open:
 			pass
 		elif bottom_message_box_over_ui.is_open:
 			pass
 		else:
+			var closed_one = false
 			for p in pause_related_panels:
 				if p.is_open:
 					p.collapse()
+					closed_one = true
 					break
-	elif paused && Input.is_action_just_pressed("skip") || Input.is_action_just_pressed("done_reading_message"):
+			if not closed_one:
+				pause_panel.popup()
+	# message boxes
+	elif paused && (bottom_message_box.is_open || bottom_message_box_over_ui.is_open) && Input.is_action_just_pressed("done_reading_message"):
 		if bottom_message_box.is_open && !bottom_message_box.is_typing && bottom_message_box.is_read:
 			# stub
 			pass
 		elif bottom_message_box_over_ui.is_open && !bottom_message_box_over_ui.is_typing && bottom_message_box_over_ui.is_read:
 			bottom_message_box_over_ui.collapse("inventory_look_button")
+	# open/close pause
+	elif not in_battle && Input.is_action_just_released("pause"):
+		if paused && no_panel_other_than_pause_is_open():
+			pause_panel.collapse()
+		elif not paused:
+			pause_panel.popup()
 
 func no_panel_other_than_pause_is_open() -> bool:
 	return pause_related_panels_but_no_root_panel.filter(func(p): return p.is_open).size() == 0
