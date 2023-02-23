@@ -8,9 +8,9 @@ var paused: bool = false
 
 @onready var inventory_panel = $root/inventory_panel
 @onready var inventory_item_panel = $root/inventory_item_panel
-var inventory_item_panel_selected_button = null
-var inventory_item_panel_selected_item: InventoryItem = null
-var inventory_panel_item___type_description_index = 0
+var inventory_item_panel___selected_button = null
+var inventory_item_panel___selected_item: InventoryItem = null
+var inventory_item_panel___description_index = 0
 
 @onready var leave_game_panel = $root/leave_panel
 
@@ -64,7 +64,7 @@ func _ready():
 	inventory_item_panel.after_popup.connect(func(_goal):
 		$root/inventory_item_panel/PanelContainer/MarginContainer/VBoxContainer/use_button.grab_focus())
 	inventory_item_panel.after_collapse.connect(func(_goal):
-		inventory_item_panel_selected_button.grab_focus())
+		inventory_item_panel___selected_button.grab_focus())
 	inventory_item_panel.outer_click.connect(func():
 		if bottom_message_box_over_ui.is_open:
 			return
@@ -74,8 +74,8 @@ func _ready():
 	$root/inventory_item_panel/PanelContainer/MarginContainer/VBoxContainer/look_button.pressed.connect(func():
 		get_viewport().gui_release_focus()
 		bottom_message_box_over_ui.popup()
-		inventory_panel_item___type_description_index = 0
-		inventory_panel_item___type_description())
+		inventory_item_panel___description_index = 0
+		inventory_item_panel___show_description())
 
 	# leave game panel
 	leave_game_panel.after_popup.connect(func(_goal):
@@ -171,8 +171,8 @@ func create_inventory_item_button(item: InventoryItem):
 	btn.text = item.name + " × " + str(item.quantity)
 	btn.alignment = HorizontalAlignment.HORIZONTAL_ALIGNMENT_LEFT
 	btn.pressed.connect(func():
-		inventory_item_panel_selected_item = item
-		inventory_item_panel_selected_button = btn
+		inventory_item_panel___selected_item = item
+		inventory_item_panel___selected_button = btn
 		inventory_item_panel.popup())
 	return btn
 
@@ -187,9 +187,9 @@ func inventory_category_from_index(index: int) -> InventoryItem.Category:
 		InventoryItem.Category.OTHER
 	)
 
-func inventory_panel_item___type_description():
-	if inventory_panel_item___type_description_index == inventory_item_panel_selected_item.description.size():
+func inventory_item_panel___show_description():
+	if inventory_item_panel___description_index == inventory_item_panel___selected_item.description.size():
 		return
-	var msg = inventory_item_panel_selected_item.description[inventory_panel_item___type_description_index]
-	inventory_panel_item___type_description_index += 1
-	bottom_message_box_over_ui.type_message(msg, inventory_panel_item___type_description)
+	var msg = inventory_item_panel___selected_item.description[inventory_item_panel___description_index]
+	inventory_item_panel___description_index += 1
+	bottom_message_box_over_ui.type_message(msg, inventory_item_panel___show_description)
