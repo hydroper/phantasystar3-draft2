@@ -127,10 +127,10 @@ func _process(_delta):
 					p.collapse()
 					break
 	elif paused && Input.is_action_just_pressed("skip") || Input.is_action_just_pressed("ui_cancel"):
-		if bottom_message_box.is_open:
+		if bottom_message_box.is_open && !bottom_message_box.is_typing:
 			# stub
 			pass
-		elif bottom_message_box_over_ui.is_open:
+		elif bottom_message_box_over_ui.is_open && !bottom_message_box_over_ui.is_typing:
 			bottom_message_box_over_ui.collapse("inventory_look_button")
 
 func no_panel_other_than_pause_is_open() -> bool:

@@ -27,3 +27,4 @@ class Dimate extends InventoryItem:
 		accumulates = true
 		category = Category.CONSUMABLE
 		quantity = qty
+		description = ["NaN", "+Infinity"]
