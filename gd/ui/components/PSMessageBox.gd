@@ -1,6 +1,6 @@
 extends BaseAnimatedPanel
 
-signal after_read
+var _after_read_callback = null
 
 @onready
 var _rtl = $PanelContainer/MarginContainer/VBoxContainer/message
@@ -9,7 +9,8 @@ var _typing_remaining := PackedStringArray()
 var _typing_frame_max: int = 2
 var _typing_frame_counter: int = 0
 
-func type_message(msg: String):
+func type_message(msg: String, after_read_callback: Callable = func(): pass):
+	_after_read_callback = after_read_callback
 	_rtl.text = ""
 	if msg == "":
 		_typing = false
@@ -34,4 +35,6 @@ func _process(delta):
 			_typing_frame_counter += 1
 			_typing_frame_counter %= _typing_frame_max
 	elif Input.is_action_just_released("skip") && is_open && (not _typing):
-		after_read.emit()
+		if _after_read_callback != null:
+			_after_read_callback.call()
+			_after_read_callback = null
